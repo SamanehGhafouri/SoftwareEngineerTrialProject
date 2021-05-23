@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import {StatisticsService} from '../statistics.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-input',
@@ -7,18 +9,44 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./user-input.component.css']
 })
 export class UserInputComponent implements OnInit {
-  uploadForm: FormGroup;
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private service: StatisticsService, public router: Router) { }
 
   ngOnInit(): void {
-    this.uploadForm = new FormGroup({
-      inputData: new FormControl(''),
-      uploadData: new FormControl('')
+    this.form = new FormGroup({
+      inputData: new FormControl('{example_text:"example text value"}'),
+      uploadFile: new FormControl('')
     });
   }
   onSubmit(){
-    console.log('I uploaded', this.uploadForm.value);
+    if (this.form.value.inputData) {
+      console.log('this is coming from inputData');
+      const requestObserver = this.service.uploadJson(this.form.value.inputData);
+      requestObserver.subscribe({
+        next: data => {
+          console.log('## RESPONSE FROM BACK END ##', data);
+        },
+        error: error => {
+          const errorMessage = error.message;
+          console.error('There was an error!', error);
+        }
+      });
+    }
+    else {
+      console.log('this is coming from uploadFile');
+      const requestObserver = this.service.uploadJson(this.form.value.inputData);
+      requestObserver.subscribe({
+        next: data => {
+          console.log('## RESPONSE FROM BACK END ##', data);
+        },
+        error: error => {
+          const errorMessage = error.message;
+          console.error('There was an error!', error);
+        }
+      });
+    }
+    // this.router.navigate(['/results']);
   }
 
 }
