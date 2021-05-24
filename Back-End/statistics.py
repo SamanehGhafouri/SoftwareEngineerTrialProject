@@ -1,6 +1,7 @@
 import json
 from json2xml import json2xml
 from json2xml.utils import readfromstring
+import math
 
 
 class Statistics:
@@ -10,7 +11,15 @@ class Statistics:
         self.file_format = file_format
 
     def percentage_female_versus_male(self) -> float:
-        return 10.1
+        count_female = 0
+        count_male = 0
+        for obj in self.json_data["results"]:
+            if obj["gender"] == "female":
+                count_female += 1
+            else:
+                count_male += 1
+        female_percent = (count_female / (count_male + count_female)) * 100
+        return math.floor(female_percent * 10 ** 1) / 10 * 1
 
     def percentage_first_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
         return 20.1
@@ -78,16 +87,16 @@ class Statistics:
         return json2xml.Json2xml(json_string).to_xml()
 
     def formatted_response(self) -> str:
-        if self.file_format == 'json':
+        if self.file_format == "json":
             return self.formatted_response_json()
-        if self.file_format == 'txt':
+        if self.file_format == "txt":
             return self.formatted_response_txt()
-        if self.file_format == 'xml':
+        if self.file_format == "xml":
             return self.formatted_response_xml()
 
 
-if __name__ == '__main__':
-    with open('test_data.json', 'r') as f:
+if __name__ == "__main__":
+    with open("test_data.json", "r") as f:
         data_obj = json.load(f)
 
         get_json = Statistics(data_obj, "json")

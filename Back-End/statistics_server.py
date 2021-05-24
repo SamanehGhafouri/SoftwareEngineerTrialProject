@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request
 from statistics import Statistics
 from flask_cors import CORS
@@ -18,8 +20,8 @@ class FlaskServer:
     def results(self):
         print(request.headers)
         print(request.data)
-
-        stats = Statistics(request.data, "json")
+        json_data = json.loads(request.data)
+        stats = Statistics(json_data, "json")
         return stats.formatted_response()
 
 
