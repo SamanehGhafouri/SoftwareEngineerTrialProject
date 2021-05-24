@@ -31,11 +31,20 @@ class Statistics:
                 count_A_M += 1
             elif re.match(r"^[N-Z]", name['first'][0]):
                 count_N_Z += 1
-        percentage_A_Z = (count_A_M / (count_A_M + count_N_Z)) * 100
-        return math.floor(percentage_A_Z * 10 ** 1) / 10 * 1
+        percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
+        return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
 
     def percentage_last_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
-        return 30.1
+        count_A_M = 0
+        count_N_Z = 0
+        for obj in self.json_data['results']:
+            name = obj['name']
+            if re.match(r"^[A-M]", name['last'][0]):
+                count_A_M += 1
+            elif re.match(r"^[N-Z]", name['last'][0]):
+                count_N_Z += 1
+        percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
+        return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
 
     def percentage_people_in_each_state_top_10_populous_states(self) -> float:
         return 40.1
