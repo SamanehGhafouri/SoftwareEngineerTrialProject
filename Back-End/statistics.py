@@ -22,29 +22,23 @@ class Statistics:
         female_percent = (count_female / (count_male + count_female)) * 100
         return math.floor(female_percent * 10 ** 1) / 10 * 1
 
-    def percentage_first_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
+    def percentage_names_start_with_A_to_M_vs_N_to_Z_helper(self, parts_of_name) -> float:
         count_A_M = 0
         count_N_Z = 0
         for obj in self.json_data["results"]:
-            name = obj['name']
-            if re.match(r"^[A-M]", name["first"][0]):
+            name = obj["name"]
+            if re.match(r"^[A-M]", name[parts_of_name][0]):
                 count_A_M += 1
-            elif re.match(r"^[N-Z]", name["first"][0]):
+            elif re.match(r"^[N-Z]", name[parts_of_name][0]):
                 count_N_Z += 1
         percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
         return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
 
+    def percentage_first_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
+        return self.percentage_names_start_with_A_to_M_vs_N_to_Z_helper("first")
+
     def percentage_last_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
-        count_A_M = 0
-        count_N_Z = 0
-        for obj in self.json_data["results"]:
-            name = obj['name']
-            if re.match(r"^[A-M]", name["last"][0]):
-                count_A_M += 1
-            elif re.match(r"^[N-Z]", name["last"][0]):
-                count_N_Z += 1
-        percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
-        return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
+        return self.percentage_names_start_with_A_to_M_vs_N_to_Z_helper("last")
 
     def percentage_people_in_each_state_top_10_populous_states(self):
         top_ten_states = {}
@@ -67,8 +61,8 @@ class Statistics:
     def percentage_gender_in_each_state_top_10_helper(self, gender):
         top_ten_states = {}
 
-        for obj in self.json_data['results']:
-            if obj['gender'] == gender:
+        for obj in self.json_data["results"]:
+            if obj["gender"] == gender:
                 state = obj["location"]["state"]
                 if state in top_ten_states:
                     top_ten_states[state] += 1
@@ -84,10 +78,10 @@ class Statistics:
         return percentage_dict
 
     def percentage_females_in_each_state_top_10_populous_states(self):
-        return self.percentage_gender_in_each_state_top_10_helper('female')
+        return self.percentage_gender_in_each_state_top_10_helper("female")
 
     def percentage_males_in_each_state_top_10_populous_states(self):
-        return self.percentage_gender_in_each_state_top_10_helper('male')
+        return self.percentage_gender_in_each_state_top_10_helper("male")
 
     def percentage_people_in_age_ranges(self) -> float:
         return 70.1
