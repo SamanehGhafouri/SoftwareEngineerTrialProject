@@ -83,8 +83,36 @@ class Statistics:
     def percentage_males_in_each_state_top_10_populous_states(self):
         return self.percentage_gender_in_each_state_top_10_helper("male")
 
-    def percentage_people_in_age_ranges(self) -> float:
-        return 70.1
+    def percentage_people_in_age_ranges(self):
+        group_under_20 = 0
+        group_21_40 = 0
+        group_41_60 = 0
+        group_61_80 = 0
+        group_81_100 = 0
+        group_100_above = 0
+        total_people = len(self.json_data["results"])
+
+        for obj in self.json_data["results"]:
+            age = obj["dob"]["age"]
+            if age < 21:
+                group_under_20 += 1
+            elif age < 41:
+                group_21_40 += 1
+            elif age < 61:
+                group_41_60 += 1
+            elif age < 81:
+                group_61_80 += 1
+            elif age < 100:
+                group_81_100 += 1
+            else:
+                group_100_above += 1
+        age_range_dict = {"0-20": group_under_20, "21-40": group_21_40, "41-60": group_41_60,
+                          "61-80": group_61_80, "81-100": group_81_100, "100+": group_100_above}
+
+        for age_range, groups in age_range_dict.items():
+            percentage = (groups / total_people) * 100
+            age_range_dict[age_range] = math.floor(percentage * 10 ** 2) / 10 ** 2
+        return age_range_dict
 
     def formatted_response_json(self) -> str:
         stats = {
@@ -112,6 +140,7 @@ class Statistics:
         return json.dumps(results, indent=2)
 
     def formatted_response_txt(self) -> str:
+        # TODO: complete return type txt ###
         percent_stat_1 = "Percentage female versus male"
         percent_stat_2 = "Percentage of first names that start with A-M versus N-Z"
         percent_stat_3 = "Percentage of last names that start with A-M versus N-Z"
@@ -130,6 +159,7 @@ class Statistics:
         return results
 
     def formatted_response_xml(self) -> str:
+        # TODO: complete return type xml ###
         json_string = readfromstring(self.formatted_response_json())
         return json2xml.Json2xml(json_string).to_xml()
 
