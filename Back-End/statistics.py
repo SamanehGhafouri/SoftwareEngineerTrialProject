@@ -25,11 +25,11 @@ class Statistics:
     def percentage_first_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
         count_A_M = 0
         count_N_Z = 0
-        for obj in self.json_data['results']:
+        for obj in self.json_data["results"]:
             name = obj['name']
-            if re.match(r"^[A-M]", name['first'][0]):
+            if re.match(r"^[A-M]", name["first"][0]):
                 count_A_M += 1
-            elif re.match(r"^[N-Z]", name['first'][0]):
+            elif re.match(r"^[N-Z]", name["first"][0]):
                 count_N_Z += 1
         percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
         return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
@@ -37,17 +37,32 @@ class Statistics:
     def percentage_last_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
         count_A_M = 0
         count_N_Z = 0
-        for obj in self.json_data['results']:
+        for obj in self.json_data["results"]:
             name = obj['name']
-            if re.match(r"^[A-M]", name['last'][0]):
+            if re.match(r"^[A-M]", name["last"][0]):
                 count_A_M += 1
-            elif re.match(r"^[N-Z]", name['last'][0]):
+            elif re.match(r"^[N-Z]", name["last"][0]):
                 count_N_Z += 1
         percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
         return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
 
-    def percentage_people_in_each_state_top_10_populous_states(self) -> float:
-        return 40.1
+    def percentage_people_in_each_state_top_10_populous_states(self):
+        top_ten_states = {}
+
+        for obj in self.json_data["results"]:
+            state = obj["location"]["state"]
+            if state in top_ten_states:
+                top_ten_states[state] += 1
+            else:
+                top_ten_states[state] = 1
+
+        sorted_top_ten_states = {k: v for k, v in sorted(top_ten_states.items(), key=lambda item: item[1])[-10:]}
+
+        sum_all_people_in_populous_states = sum(sorted_top_ten_states.values())
+        for state, populous in sorted_top_ten_states.items():
+            percentage = (populous / sum_all_people_in_populous_states) * 100
+            sorted_top_ten_states[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
+        return sorted_top_ten_states
 
     def percentage_females_in_each_state_top_10_populous_states(self) -> float:
         return 50.1
