@@ -64,11 +64,11 @@ class Statistics:
             sorted_top_ten_states[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
         return sorted_top_ten_states
 
-    def percentage_females_in_each_state_top_10_populous_states(self):
+    def percentage_gender_in_each_state_top_10_helper(self, gender):
         top_ten_states = {}
 
         for obj in self.json_data['results']:
-            if obj['gender'] == 'female':
+            if obj['gender'] == gender:
                 state = obj["location"]["state"]
                 if state in top_ten_states:
                     top_ten_states[state] += 1
@@ -82,25 +82,12 @@ class Statistics:
             percentage = (populous / sum_all_people_in_populous_states) * 100
             percentage_dict[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
         return percentage_dict
+
+    def percentage_females_in_each_state_top_10_populous_states(self):
+        return self.percentage_gender_in_each_state_top_10_helper('female')
 
     def percentage_males_in_each_state_top_10_populous_states(self):
-        top_ten_states = {}
-
-        for obj in self.json_data['results']:
-            if obj['gender'] == 'male':
-                state = obj["location"]["state"]
-                if state in top_ten_states:
-                    top_ten_states[state] += 1
-                else:
-                    top_ten_states[state] = 1
-        sorted_top_ten_states = {k: v for k, v in sorted(top_ten_states.items(), key=lambda item: item[1])[-10:]}
-
-        percentage_dict = {}
-        sum_all_people_in_populous_states = sum(sorted_top_ten_states.values())
-        for state, populous in sorted_top_ten_states.items():
-            percentage = (populous / sum_all_people_in_populous_states) * 100
-            percentage_dict[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
-        return percentage_dict
+        return self.percentage_gender_in_each_state_top_10_helper('male')
 
     def percentage_people_in_age_ranges(self) -> float:
         return 70.1
