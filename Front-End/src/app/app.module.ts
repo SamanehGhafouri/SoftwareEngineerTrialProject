@@ -27,7 +27,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [StatisticsService],
+  providers: [StatisticsService, UserInputComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

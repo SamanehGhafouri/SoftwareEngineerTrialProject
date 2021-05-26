@@ -12,9 +12,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class UserInputComponent implements OnInit {
   form: FormGroup;
   jsonString;
-  responseData;
 
-  constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -47,7 +47,7 @@ export class UserInputComponent implements OnInit {
           this.spinner.hide();
           this.router.navigate(['/results']);
           // route to next page and pass data
-          this.responseData = data;
+          this.service.responseData = data;
           console.log('## RESPONSE FROM BACK END ##', data);
         },
         error: error => {

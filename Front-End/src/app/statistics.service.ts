@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class StatisticsService {
-
+  public responseData;
   constructor(private http: HttpClient) { }
 
   uploadJson(json: string){
