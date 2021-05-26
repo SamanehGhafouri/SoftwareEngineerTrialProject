@@ -10,15 +10,30 @@ import {Router} from '@angular/router';
 })
 export class UserInputComponent implements OnInit {
   form: FormGroup;
+  jsonString;
 
   constructor(private service: StatisticsService, public router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      inputData: new FormControl('{example_text:"example text value"}'),
+      inputData: new FormControl(''),
       uploadFile: new FormControl('')
     });
   }
+  onFileSelected(event) {
+    const fileReader = new FileReader();
+    fileReader.readAsText(event.target.files[0], 'UTF-8');
+    fileReader.onload = () => {
+      if (typeof fileReader.result === 'string') {
+        this.jsonString = fileReader.result;
+        // console.log(JSON.parse(fileReader.result));
+      }
+    };
+    fileReader.onerror = (error) => {
+      console.log(error);
+    };
+  }
+
   onSubmit(){
     if (this.form.value.inputData) {
       console.log('this is coming from inputData');
@@ -33,20 +48,7 @@ export class UserInputComponent implements OnInit {
         }
       });
     }
-    else {
-      console.log('this is coming from uploadFile');
-      const requestObserver = this.service.uploadJson(this.form.value.inputData);
-      requestObserver.subscribe({
-        next: data => {
-          console.log('## RESPONSE FROM BACK END ##', data);
-        },
-        error: error => {
-          const errorMessage = error.message;
-          console.error('There was an error!', error);
-        }
-      });
-    }
+    this.form.reset();
     // this.router.navigate(['/results']);
   }
-
 }

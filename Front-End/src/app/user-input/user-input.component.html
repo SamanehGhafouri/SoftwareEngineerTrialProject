@@ -6,11 +6,12 @@
               cols="50"
               formControlName="inputData"
               placeholder="Enter Data"
+              [(ngModel)]="jsonString"
               required>
     </textarea>
   </div>
   <div class="form-group">
-    <input class="form-control" formControlName="uploadFile" type="file">
+    <input class="form-control" formControlName="uploadFile" type="file" (change)="onFileSelected($event)">
     <button type="submit">Submit</button>
   </div>
 </form>
