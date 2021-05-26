@@ -1,5 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <span *ngIf="inputData.invalid &&
+    (inputData.dirty || inputData.touched)"
+         class="alert alert-danger">Please Enter Proper Json</span>
+<!--    <div *ngIf="inputData.errors?.required">Input Json Required!</div>-->
     <textarea class="form-control"
               type="text"
               rows="10"
