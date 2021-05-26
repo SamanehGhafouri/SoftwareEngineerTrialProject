@@ -1,8 +1,8 @@
 import json
-
 from flask import Flask, request
 from statistics import Statistics
 from flask_cors import CORS
+from time import sleep
 
 
 class FlaskServer:
@@ -18,6 +18,8 @@ class FlaskServer:
         return "HOME"
 
     def results(self):
+        # TODO: remove sleep after development
+        sleep(.5)
         print(request.headers)
         print(request.data)
         json_data = json.loads(request.data)
