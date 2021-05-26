@@ -13,5 +13,13 @@
   <div class="form-group">
     <input class="form-control" formControlName="uploadFile" type="file" (change)="onFileSelected($event)">
     <button type="submit">Submit</button>
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)"
+                 size = "medium"
+                 color = "#d4cccc"
+                 type = "square-jelly-box"
+                 [fullScreen] = "true">
+      <p style="color: white" > Communicating with Back End... </p>
+    </ngx-spinner>
   </div>
 </form>
+

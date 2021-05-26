@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {StatisticsService} from '../statistics.service';
 import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-input',
@@ -12,7 +13,7 @@ export class UserInputComponent implements OnInit {
   form: FormGroup;
   jsonString;
 
-  constructor(private service: StatisticsService, public router: Router) { }
+  constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -49,6 +50,10 @@ export class UserInputComponent implements OnInit {
       });
     }
     this.form.reset();
-    // this.router.navigate(['/results']);
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+      this.router.navigate(['/results']);
+    }, 5000);
   }
 }

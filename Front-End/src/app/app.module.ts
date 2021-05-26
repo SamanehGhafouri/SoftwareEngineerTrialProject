@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +8,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { StatisticsResultComponent } from './statistics-result/statistics-result.component';
 import {StatisticsService} from './statistics.service';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -20,8 +22,11 @@ import {StatisticsService} from './statistics.service';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [StatisticsService],
   bootstrap: [AppComponent]
 })
