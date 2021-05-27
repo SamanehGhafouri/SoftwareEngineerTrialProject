@@ -18,18 +18,11 @@ export type ChartOptions = {
 export class StatisticsResultComponent{
   @ViewChild('chart-stats') chart: StatisticsResultComponent;
   public chartOptions: Partial<ChartOptions>;
-  statistics;
-  definitionsD;
-  statisticOne;
-  statisticTwo;
-  statisticThree;
-  statisticFour;
-  statisticFive;
-  statisticSix;
-  statisticSeven;
+  statistics; statDefinitions;
+  statisticOne; statisticTwo; statisticThree; statisticFour; statisticFive; statisticSix; statisticSeven;
   constructor(private userInput: UserInputComponent, private service: StatisticsService) {
     this.statistics = this.service.responseData.stats;
-    this.definitionsD = this.service.responseData.definitions;
+    this.statDefinitions = this.service.responseData.definitions;
 
     this.chartOptions = {
       series: [],
@@ -56,54 +49,69 @@ export class StatisticsResultComponent{
   statOne(){
     this.statisticOne = this.statistics.percent_stat_1;
     this.chartOptions.series = [this.statisticOne, (100 - this.statisticOne)];
+    this.chartOptions.labels = ['Female', 'Male'];
   }
   statTwo(){
     this.statisticTwo = this.statistics.percent_stat_2;
     this.chartOptions.series = [this.statisticTwo, (100 - this.statisticTwo)];
+    this.chartOptions.labels = ['First Name (A-M)', 'First Name (N-Z)'];
   }
   statThree(){
     this.statisticThree = this.statistics.percent_stat_3;
     this.chartOptions.series = [this.statisticThree, (100 - this.statisticThree)];
+    this.chartOptions.labels = ['Last Name (A-M)', 'Last Name (N-Z)'];
   }
   statFour(){
     this.statisticFour = this.statistics.percent_stat_4;
-    const arr = [];
+    const arrValues = [];
+    const arrKeys = [];
     for (const key in this.statisticFour){
       if (this.statisticFour.hasOwnProperty(key)){
-        arr.push(this.statisticFour[key]);
+        arrValues.push(this.statisticFour[key]);
+        arrKeys.push(key);
       }
     }
-    this.chartOptions.series = arr;
+    this.chartOptions.series = arrValues;
+    this.chartOptions.labels = arrKeys;
   }
   statFive(){
     this.statisticFive = this.statistics.percent_stat_5;
-    const arr = [];
+    const arrValues = [];
+    const arrKeys = [];
     for (const key in this.statisticFive){
       if (this.statisticFive.hasOwnProperty(key)){
-        arr.push(this.statisticFive[key]);
+        arrValues.push(this.statisticFive[key]);
+        arrKeys.push(key);
       }
     }
-    this.chartOptions.series = arr;
+    this.chartOptions.series = arrValues;
+    this.chartOptions.labels = arrKeys;
   }
   statSix(){
     this.statisticSix = this.statistics.percent_stat_6;
-    const arr = [];
+    const arrValues = [];
+    const arrKeys = [];
     for (const key in this.statisticSix){
       if (this.statisticSix.hasOwnProperty(key)){
-        arr.push(this.statisticSix[key]);
+        arrValues.push(this.statisticSix[key]);
+        arrKeys.push(key);
       }
     }
-    this.chartOptions.series = arr;
+    this.chartOptions.series = arrValues;
+    this.chartOptions.labels = arrKeys;
   }
   statSeven(){
     this.statisticSeven = this.statistics.percent_stat_7;
-    const arr = [];
+    const arrValues = [];
+    const arrKeys = [];
     for (const key in this.statisticSeven){
       if (this.statisticSeven.hasOwnProperty(key)){
-        arr.push(this.statisticSeven[key]);
+        arrValues.push(this.statisticSeven[key]);
+        arrKeys.push(key);
       }
     }
-    this.chartOptions.series = arr;
+    this.chartOptions.series = arrValues;
+    this.chartOptions.labels = arrKeys;
   }
 
 }
