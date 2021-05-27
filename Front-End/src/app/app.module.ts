@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserInputComponent } from './user-input/user-input.component';
@@ -10,13 +9,14 @@ import { StatisticsResultComponent } from './statistics-result/statistics-result
 import {StatisticsService} from './statistics.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserInputComponent,
-    StatisticsResultComponent
+    StatisticsResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    NgApexchartsModule,
     BrowserAnimationsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
