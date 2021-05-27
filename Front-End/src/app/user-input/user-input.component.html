@@ -3,7 +3,6 @@
     <span *ngIf="inputData.invalid &&
     (inputData.dirty || inputData.touched)"
          class="alert alert-danger">Please Enter Proper Json</span>
-<!--    <div *ngIf="inputData.errors?.required">Input Json Required!</div>-->
     <textarea class="form-control"
               type="text"
               rows="10"
@@ -16,7 +15,9 @@
   </div>
   <div class="form-group">
     <input class="form-control" formControlName="uploadFile" type="file" (change)="onFileSelected($event)">
+    <span class="jasmine-alert">{{properFileExtensionErrorMsg}}</span>
     <button type="submit">Submit</button>
+    <span class="jasmine-alert">{{properJsonErrorMsg}}</span>
     <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)"
                  size = "medium"
                  color = "#d4cccc"

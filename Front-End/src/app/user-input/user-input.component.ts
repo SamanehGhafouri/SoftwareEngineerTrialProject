@@ -12,6 +12,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class UserInputComponent implements OnInit {
   form: FormGroup;
   jsonString;
+  properFileExtensionErrorMsg;
+  properJsonErrorMsg;
+
 
   constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) {
   }
@@ -27,9 +30,12 @@ export class UserInputComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsText(event.target.files[0], 'UTF-8');
     fileReader.onload = () => {
-      if (typeof fileReader.result === 'string') {
+      if (typeof fileReader.result === 'string' && this.service.validateFileExtension(event.target.files[0].name)) {
         this.jsonString = fileReader.result;
         // console.log(JSON.parse(fileReader.result));
+      }
+      else {
+        this.properFileExtensionErrorMsg = 'Not a Proper File Extension';
       }
     };
     fileReader.onerror = (error) => {
@@ -38,7 +44,7 @@ export class UserInputComponent implements OnInit {
   }
 
   onSubmit(){
-    if (this.form.value.inputData) {
+    if (this.form.value.inputData && this.service.properJson(this.jsonString)) {
       this.spinner.show();
       const requestObserver = this.service.uploadJson(this.form.value.inputData);
       requestObserver.subscribe({
@@ -56,6 +62,9 @@ export class UserInputComponent implements OnInit {
           console.error('There was an error!', error);
         }
       });
+    }
+    else {
+      this.properJsonErrorMsg = 'Not a proper Json file';
     }
   }
 }
