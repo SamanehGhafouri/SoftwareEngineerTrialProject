@@ -19,7 +19,7 @@ class FlaskServer:
 
     def results(self):
         # TODO: remove sleep after development
-        sleep(.5)
+        # sleep(1)
         print(request.headers)
         print(request.data)
         json_data = json.loads(request.data)

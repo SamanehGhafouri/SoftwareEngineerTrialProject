@@ -20,7 +20,7 @@ class Statistics:
             else:
                 count_male += 1
         female_percent = (count_female / (count_male + count_female)) * 100
-        return math.floor(female_percent * 10 ** 1) / 10 * 1
+        return math.floor(female_percent * 100) / 100
 
     def percentage_names_start_with_A_to_M_vs_N_to_Z_helper(self, parts_of_name) -> float:
         count_A_M = 0
@@ -32,7 +32,7 @@ class Statistics:
             elif re.match(r"^[N-Z]", name[parts_of_name][0]):
                 count_N_Z += 1
         percentage_A_M = (count_A_M / (count_A_M + count_N_Z)) * 100
-        return math.floor(percentage_A_M * 10 ** 1) / 10 * 1
+        return math.floor(percentage_A_M * 100) / 100
 
     def percentage_first_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
         return self.percentage_names_start_with_A_to_M_vs_N_to_Z_helper("first")
