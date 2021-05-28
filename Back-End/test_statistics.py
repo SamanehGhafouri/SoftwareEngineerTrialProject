@@ -26,6 +26,12 @@ class Test(unittest.TestCase):
         expected = 71.42
         self.assertEqual(expected, actual, expected == actual)
 
+    def test_percentage_last_names_start_with_A_to_M_vs_N_to_Z(self):
+        stat = Statistics(read_json(first_json), 'json')
+        actual = stat.percentage_last_names_start_with_A_to_M_vs_N_to_Z()
+        expected = 28.57
+        self.assertEqual(expected, actual, expected == actual)
+
 
 if __name__ == '__main__':
     unittest.main()
