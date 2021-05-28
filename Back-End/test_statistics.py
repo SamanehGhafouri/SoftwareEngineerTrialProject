@@ -4,12 +4,26 @@ import json
 
 first_json = "first_json_data.json"
 second_json = "second_json_data.json"
+third_json = "third_json_data.json"
 
 
 def read_json(json_f):
     with open(json_f, "r") as f:
         data_obj = json.load(f)
     return data_obj
+
+
+def count_state(json_f):
+    dic_stat = {}
+    total = 0
+    for obj in read_json(json_f)["results"]:
+        total += 1
+        state = obj["location"]["state"]
+        if state in dic_stat:
+            dic_stat[state] += 1
+        else:
+            dic_stat[state] = 1
+    return dic_stat, total
 
 
 class Test(unittest.TestCase):
@@ -35,10 +49,20 @@ class Test(unittest.TestCase):
     def test_percentage_people_in_each_state_top_10_populous_states(self):
         stat = Statistics(read_json(second_json), 'json')
         actual = stat.percentage_people_in_each_state_top_10_populous_states()
-        expected = {"New York": 18.33, "Bayern": 16.66, "Galway": 15.00, "Baden": 13.33, "Rioja": 11.66,
-                    "Colorado": 8.33, "Marlborough": 6.66, "Ceuta": 5.00, "Bay": 3.33, "Brooklyn": 1.66}
+        expected = {"New York": 18.33, "Bayern": 16.67, "Galway": 15.00, "Baden": 13.33, "Rioja": 11.67,
+                    "Colorado": 8.33, "Marlborough": 6.67, "Ceuta": 5.00, "Bay": 3.33, "Brooklyn": 1.67, "Others": 0.00}
+        self.assertEqual(expected, actual, expected == actual)
+
+    def test_percentage_people_in_each_state_top_10_populous_states_second_test(self):
+        stat = Statistics(read_json(third_json), 'json')
+        actual = stat.percentage_people_in_each_state_top_10_populous_states()
+        expected = {"New York": 18.03, "Bayern": 16.39, "Galway": 14.75, "Baden": 13.11, "Rioja": 9.84,
+                    "Colorado": 8.20, "Marlborough": 6.56, "Ceuta": 4.92, "Bay": 3.28, "Brooklyn": 3.28, "Others": 1.64}
         self.assertEqual(expected, actual, expected == actual)
 
 
 if __name__ == '__main__':
     unittest.main()
+    # result = count_state(second_json)
+    # print(result)
+

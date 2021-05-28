@@ -42,8 +42,9 @@ class Statistics:
 
     def percentage_people_in_each_state_top_10_populous_states(self):
         top_ten_states = {}
-
+        total_people = 0
         for obj in self.json_data["results"]:
+            total_people += 1
             state = obj["location"]["state"]
             if state in top_ten_states:
                 top_ten_states[state] += 1
@@ -52,10 +53,11 @@ class Statistics:
 
         sorted_top_ten_states = {k: v for k, v in sorted(top_ten_states.items(), key=lambda item: item[1])[-10:]}
 
-        sum_all_people_in_populous_states = sum(sorted_top_ten_states.values())
         for state, populous in sorted_top_ten_states.items():
-            percentage = (populous / sum_all_people_in_populous_states) * 100
-            sorted_top_ten_states[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
+            percentage = (populous / total_people) * 100
+            sorted_top_ten_states[state] = round(percentage, 2)
+        other_states = 100 - sum(sorted_top_ten_states.values())
+        sorted_top_ten_states["Others"] = round(other_states, 2)
         return sorted_top_ten_states
 
     def percentage_gender_in_each_state_top_10_helper(self, gender):
@@ -173,7 +175,7 @@ class Statistics:
 
 
 if __name__ == "__main__":
-    with open("test_data.json", "r") as f:
+    with open("third_json_data.json", "r") as f:
         data_obj = json.load(f)
 
         get_json = Statistics(data_obj, "json")
