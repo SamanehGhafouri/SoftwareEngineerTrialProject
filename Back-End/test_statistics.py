@@ -3,7 +3,7 @@ from statistics import Statistics
 import json
 
 
-female_vs_male_json = "test_percentage_female_vs_male.json"
+first_json = "first_json_data.json"
 
 
 def read_json(json_f):
@@ -15,8 +15,14 @@ def read_json(json_f):
 class Test(unittest.TestCase):
 
     def test_percentage_female_vs_male(self):
-        stat = Statistics(read_json(female_vs_male_json), 'json')
+        stat = Statistics(read_json(first_json), 'json')
         actual = stat.percentage_female_versus_male()
+        expected = 85.71
+        self.assertEqual(expected, actual, expected == actual)
+
+    def test_percentage_first_names_start_with_A_to_M_vs_N_to_Z(self):
+        stat = Statistics(read_json(first_json), 'json')
+        actual = stat.percentage_first_names_start_with_A_to_M_vs_N_to_Z()
         expected = 85.71
         self.assertEqual(expected, actual, expected == actual)
 
