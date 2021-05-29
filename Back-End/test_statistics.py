@@ -5,6 +5,7 @@ import json
 first_json = "first_json_data.json"
 second_json = "second_json_data.json"
 third_json = "third_json_data.json"
+last_json = "last_json_data.json"
 
 
 def read_json(json_f):
@@ -59,6 +60,13 @@ class Test(unittest.TestCase):
         actual = stat.percentage_males_in_each_state_top_10_populous_states()
         expected = {"New York": 63.64, "Bayern": 40.00, "Galway": 55.56, "Baden": 37.50, "Rioja": 33.33,
                     "Colorado": 60.00, "Marlborough": 75.00, "Bay": 50.00, "Ceuta": 100.00}
+        self.assertEqual(expected, actual, expected == actual)
+
+    def test_percentage_people_in_age_ranges(self):
+        stat = Statistics(read_json(last_json), "json")
+        actual = stat.percentage_people_in_age_ranges()
+        expected = {"0-20": 28.57, "21-40": 23.81, "41-60": 19.05,
+                    "61-80": 14.29, "81-100": 9.52, "100+": 4.76}
         self.assertEqual(expected, actual, expected == actual)
 
 

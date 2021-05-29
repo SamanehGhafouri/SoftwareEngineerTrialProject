@@ -110,7 +110,7 @@ class Statistics:
                 group_41_60 += 1
             elif age < 81:
                 group_61_80 += 1
-            elif age < 100:
+            elif age < 101:
                 group_81_100 += 1
             else:
                 group_100_above += 1
@@ -119,7 +119,7 @@ class Statistics:
 
         for age_range, groups in age_range_dict.items():
             percentage = (groups / total_people) * 100
-            age_range_dict[age_range] = math.floor(percentage * 10 ** 2) / 10 ** 2
+            age_range_dict[age_range] = round(percentage, 2)
         return age_range_dict
 
     def formatted_response_json(self) -> str:
@@ -192,8 +192,6 @@ if __name__ == "__main__":
         print(get_txt.formatted_response())
         print(get_xml.formatted_response())
 
-        top_ten_popu = Statistics(data_obj, "json")
-        print(top_ten_popu.top_ten_populous_states_and_total_population())
 
 
 
