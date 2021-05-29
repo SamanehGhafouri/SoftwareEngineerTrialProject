@@ -61,23 +61,32 @@ class Statistics:
         return sorted_top_ten_states
 
     def percentage_gender_in_each_state_top_10_helper(self, gender):
-        top_ten_states = {}
+        count_people_in_each_state = {}
 
         for obj in self.json_data["results"]:
-            if obj["gender"] == gender:
-                state = obj["location"]["state"]
-                if state in top_ten_states:
-                    top_ten_states[state] += 1
-                else:
-                    top_ten_states[state] = 1
-        sorted_top_ten_states = {k: v for k, v in sorted(top_ten_states.items(), key=lambda item: item[1])[-10:]}
+            state = obj["location"]["state"]
+            if state in count_people_in_each_state:
+                count_people_in_each_state[state] += 1
+            else:
+                count_people_in_each_state[state] = 1
 
-        percentage_dict = {}
-        sum_all_people_in_populous_states = sum(sorted_top_ten_states.values())
-        for state, populous in sorted_top_ten_states.items():
-            percentage = (populous / sum_all_people_in_populous_states) * 100
-            percentage_dict[state] = math.floor(percentage * 10 ** 2) / 10 ** 2
-        return percentage_dict
+        count_female_in_each_state = {}
+        for obj in self.json_data["results"]:
+            state = obj["location"]["state"]
+            if obj["gender"] == gender:
+                if state in count_female_in_each_state:
+                    count_female_in_each_state[state] += 1
+                else:
+                    count_female_in_each_state[state] = 1
+
+        for key, val in count_female_in_each_state.items():
+            if key in count_people_in_each_state:
+                percentage = (val / count_people_in_each_state[key]) * 100
+                count_female_in_each_state[key] = round(percentage, 2)
+
+        top_ten_states_populated_by_gender = {
+            k: v for k, v in sorted(count_female_in_each_state.items(), key=lambda item: item[1])[-10:]}
+        return top_ten_states_populated_by_gender
 
     def percentage_females_in_each_state_top_10_populous_states(self):
         return self.percentage_gender_in_each_state_top_10_helper("female")
