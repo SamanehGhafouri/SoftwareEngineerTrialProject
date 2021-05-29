@@ -51,7 +51,7 @@ class Test(unittest.TestCase):
         stat = Statistics(read_json(third_json), "json")
         actual = stat.percentage_females_in_each_state_top_10_populous_states()
         expected = {"New York": 36.36, "Bayern": 60.00, "Galway": 44.44, "Baden": 62.5, "Rioja": 66.67,
-                    "Colorado": 40.00, "Marlborough": 25.00, "Bay": 50.00, "Brooklyn": 100.00, "Queens": 100.00}
+                    "Colorado": 40.00, "Marlborough": 25.00, "Bay": 50.00, "Brooklyn": 100.00}
         self.assertEqual(expected, actual, expected == actual)
 
     def test_percentage_males_in_each_state_top_10_populous_states(self):

@@ -40,35 +40,34 @@ class Statistics:
     def percentage_last_names_start_with_A_to_M_vs_N_to_Z(self) -> float:
         return self.percentage_names_start_with_A_to_M_vs_N_to_Z_helper("last")
 
-    def percentage_people_in_each_state_top_10_populous_states(self):
-        top_ten_states = {}
-        total_people = 0
+    def top_ten_populous_states_and_total_population(self):
+        population_each_state = {}
+        total_population = 0
         for obj in self.json_data["results"]:
-            total_people += 1
+            total_population += 1
             state = obj["location"]["state"]
-            if state in top_ten_states:
-                top_ten_states[state] += 1
+            if state in population_each_state:
+                population_each_state[state] += 1
             else:
-                top_ten_states[state] = 1
+                population_each_state[state] = 1
+        top_ten_populous_states = {k: v for k, v in
+                                   sorted(population_each_state.items(), key=lambda item: item[1])[-10:]}
+        return top_ten_populous_states, total_population
 
-        sorted_top_ten_states = {k: v for k, v in sorted(top_ten_states.items(), key=lambda item: item[1])[-10:]}
+    def percentage_people_in_each_state_top_10_populous_states(self):
+        top_ten_populous_states = self.top_ten_populous_states_and_total_population()[0]
+        total_population = self.top_ten_populous_states_and_total_population()[1]
 
-        for state, populous in sorted_top_ten_states.items():
-            percentage = (populous / total_people) * 100
-            sorted_top_ten_states[state] = round(percentage, 2)
-        other_states = 100 - sum(sorted_top_ten_states.values())
-        sorted_top_ten_states["Others"] = round(other_states, 2)
-        return sorted_top_ten_states
+        for state, population in top_ten_populous_states.items():
+            percentage = (population / total_population) * 100
+            top_ten_populous_states[state] = round(percentage, 2)
+
+        other_states = 100 - sum(top_ten_populous_states.values())
+        top_ten_populous_states["Others"] = round(other_states, 2)
+        return top_ten_populous_states
 
     def percentage_gender_in_each_state_top_10_helper(self, gender):
-        count_people_in_each_state = {}
-
-        for obj in self.json_data["results"]:
-            state = obj["location"]["state"]
-            if state in count_people_in_each_state:
-                count_people_in_each_state[state] += 1
-            else:
-                count_people_in_each_state[state] = 1
+        top_ten_populous_states = self.top_ten_populous_states_and_total_population()[0]
 
         count_female_in_each_state = {}
         for obj in self.json_data["results"]:
@@ -79,14 +78,12 @@ class Statistics:
                 else:
                     count_female_in_each_state[state] = 1
 
+        percentage_of_gender_in_top_ten = {}
         for key, val in count_female_in_each_state.items():
-            if key in count_people_in_each_state:
-                percentage = (val / count_people_in_each_state[key]) * 100
-                count_female_in_each_state[key] = round(percentage, 2)
-
-        top_ten_states_populated_by_gender = {
-            k: v for k, v in sorted(count_female_in_each_state.items(), key=lambda item: item[1])[-10:]}
-        return top_ten_states_populated_by_gender
+            if key in top_ten_populous_states:
+                percentage = (val / top_ten_populous_states[key]) * 100
+                percentage_of_gender_in_top_ten[key] = round(percentage, 2)
+        return percentage_of_gender_in_top_ten
 
     def percentage_females_in_each_state_top_10_populous_states(self):
         return self.percentage_gender_in_each_state_top_10_helper("female")
@@ -194,3 +191,9 @@ if __name__ == "__main__":
         print(get_json.formatted_response())
         print(get_txt.formatted_response())
         print(get_xml.formatted_response())
+
+        top_ten_popu = Statistics(data_obj, "json")
+        print(top_ten_popu.top_ten_populous_states_and_total_population())
+
+
+
