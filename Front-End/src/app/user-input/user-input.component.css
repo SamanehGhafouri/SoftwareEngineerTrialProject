@@ -1,0 +1,30 @@
+h3 {
+  padding: 40px;
+  text-align: center;
+  color: darkslategray;
+}
+
+form {
+  margin: 1% 7%;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+
+textarea[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  padding: 12px 20px;
+}
+
+.form-control {
+  cursor: pointer;
+}
+

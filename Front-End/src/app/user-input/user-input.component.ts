@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {StatisticsService} from '../statistics.service';
 import {Router} from '@angular/router';
@@ -14,9 +14,12 @@ export class UserInputComponent implements OnInit {
   jsonString;
   properFileExtensionErrorMsg;
   properJsonErrorMsg;
+  isProperFileExtension;
 
 
   constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) {
+    this.isProperFileExtension = true;
+    this.properFileExtensionErrorMsg = 'File extension must be .txt or .json';
   }
 
   ngOnInit(): void {
@@ -25,17 +28,21 @@ export class UserInputComponent implements OnInit {
       uploadFile: new FormControl('')
     });
   }
-  get inputData() { return this.form.get('inputData'); }
+
+  get inputData() {
+    return this.form.get('inputData');
+  }
+
   onFileSelected(event) {
     const fileReader = new FileReader();
     fileReader.readAsText(event.target.files[0], 'UTF-8');
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string' && this.service.validateFileExtension(event.target.files[0].name)) {
+        this.isProperFileExtension = true;
         this.jsonString = fileReader.result;
         // console.log(JSON.parse(fileReader.result));
-      }
-      else {
-        this.properFileExtensionErrorMsg = 'Not a Proper File Extension';
+      } else {
+        this.isProperFileExtension = false;
       }
     };
     fileReader.onerror = (error) => {
@@ -43,7 +50,7 @@ export class UserInputComponent implements OnInit {
     };
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.form.value.inputData && this.service.properJson(this.jsonString)) {
       this.spinner.show();
       const requestObserver = this.service.uploadJson(this.form.value.inputData);
@@ -62,9 +69,8 @@ export class UserInputComponent implements OnInit {
           console.error('There was an error!', error);
         }
       });
-    }
-    else {
-      this.properJsonErrorMsg = 'Not a proper Json file';
+    } else {
+      this.properJsonErrorMsg = 'Provided data is not a proper JSON';
     }
   }
 }

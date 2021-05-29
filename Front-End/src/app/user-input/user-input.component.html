@@ -1,30 +1,33 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<h3>Random User Statistics</h3>
+<form class="was-validated" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <span *ngIf="inputData.invalid &&
-    (inputData.dirty || inputData.touched)"
-         class="alert alert-danger">Please Enter Proper Json</span>
-    <textarea class="form-control"
-              type="text"
-              rows="10"
-              cols="50"
-              formControlName="inputData"
-              placeholder="Enter Data"
-              [(ngModel)]="jsonString"
-              required>
-    </textarea>
+    <div class="mb-3">
+      <label for="validationTextarea" class="form-label">Paste JSON or Choose File</label>
+      <textarea class="form-control"
+                id="validationTextarea"
+                type="text"
+                placeholder="Enter Data..."
+                formControlName="inputData"
+                style="height: 500px"
+                [(ngModel)]="jsonString"
+                required>
+      </textarea>
+    </div>
+    <div class="mb-3">
+      <input class="form-control" formControlName="uploadFile"
+             type="file" aria-label="file example" (change)="onFileSelected($event)" required>
+      <div *ngIf="!isProperFileExtension" class="alert-danger hide">{{properFileExtensionErrorMsg}}</div>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <div class="alert-danger">{{properJsonErrorMsg}}</div>
+    </div>
   </div>
-  <div class="form-group">
-    <input class="form-control" formControlName="uploadFile" type="file" (change)="onFileSelected($event)">
-    <span class="jasmine-alert">{{properFileExtensionErrorMsg}}</span>
-    <button type="submit">Submit</button>
-    <span class="jasmine-alert">{{properJsonErrorMsg}}</span>
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)"
-                 size = "medium"
-                 color = "#d4cccc"
-                 type = "square-jelly-box"
-                 [fullScreen] = "true">
-      <p style="color: white" > Communicating with Back End... </p>
-    </ngx-spinner>
-  </div>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+               size="medium"
+               color="#d4cccc"
+               type="square-jelly-box"
+               [fullScreen]="true">
+    <p style="color: white"> Communicating with Back End... </p>
+  </ngx-spinner>
 </form>
-
