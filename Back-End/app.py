@@ -7,7 +7,7 @@ class FlaskServer:
 
     def __init__(self):
         self.service = Flask(__name__)
-        CORS(self.service, resources={"/*": {"origins": ["*"]}})
+        # CORS(self.service, resources={"/*": {"origins": ["*"]}})
         self.service.add_url_rule('/', view_func=self.home, methods=['GET'])
         self.service.add_url_rule('/results', view_func=self.results, methods=['POST'])
         self.service.add_url_rule('/results/<string:file_type>', view_func=self.results, methods=['POST'])
