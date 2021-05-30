@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserInputComponent} from '../user-input/user-input.component';
 import {StatisticsService} from '../statistics.service';
 import {ApexChart, ApexNonAxisChartSeries, ApexResponsive, NgApexchartsModule} from 'ng-apexcharts';
+import {Router} from '@angular/router';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -29,7 +30,10 @@ export class StatisticsResultComponent implements OnInit {
   statisticSix;
   statisticSeven;
 
-  constructor(private userInput: UserInputComponent, private service: StatisticsService) {
+  constructor(private userInput: UserInputComponent, private service: StatisticsService, private router: Router) {
+    if (this.service.responseData === undefined){
+      this.router.navigate(['/home']);
+    }
     this.statistics = this.service.responseData.stats;
     this.statDefinitions = this.service.responseData.definitions;
 

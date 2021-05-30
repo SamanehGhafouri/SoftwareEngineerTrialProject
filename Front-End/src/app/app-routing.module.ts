@@ -5,8 +5,10 @@ import {StatisticsResultComponent} from './statistics-result/statistics-result.c
 
 
 const routes: Routes = [
-  {path: '', component: UserInputComponent},
-  {path: 'results', component: StatisticsResultComponent}
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: UserInputComponent},
+  {path: 'results', component: StatisticsResultComponent},
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
