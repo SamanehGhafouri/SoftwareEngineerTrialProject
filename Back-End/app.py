@@ -11,7 +11,7 @@ class FlaskServer:
         self.service.add_url_rule('/', view_func=self.home, methods=['GET'])
         self.service.add_url_rule('/results', view_func=self.results, methods=['POST'])
         self.service.add_url_rule('/results/<string:file_type>', view_func=self.results, methods=['POST'])
-        self.service.run(threaded=True)
+        self.service.run(threaded=True, port=5000)
 
     def home(self):
         return render_template('home.html')
