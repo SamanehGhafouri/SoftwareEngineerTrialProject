@@ -148,7 +148,7 @@ class Statistics:
         return json.dumps(results, indent=2)
 
     def formatted_response_txt(self) -> str:
-        # TODO: complete return type txt ###
+
         percent_stat_1 = "Percentage female versus male"
         percent_stat_2 = "Percentage of first names that start with A-M versus N-Z"
         percent_stat_3 = "Percentage of last names that start with A-M versus N-Z"
@@ -167,7 +167,7 @@ class Statistics:
         return results
 
     def formatted_response_xml(self) -> str:
-        # TODO: complete return type xml ###
+
         json_string = readfromstring(self.formatted_response_json())
         return json2xml.Json2xml(json_string).to_xml()
 
