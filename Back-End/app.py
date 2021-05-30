@@ -3,6 +3,7 @@ from statistics import Statistics
 from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={"/*": {"origins": ["*"]}})
 
 
 @app.route('/', methods=['GET'])
