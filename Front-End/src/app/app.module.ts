@@ -10,6 +10,8 @@ import {StatisticsService} from './statistics.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {SidebarModule} from 'ng-sidebar';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     AppComponent,
     UserInputComponent,
     StatisticsResultComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     AppRoutingModule,
     NgxSpinnerModule,
     NgApexchartsModule,
+    SidebarModule.forRoot(),
     BrowserAnimationsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

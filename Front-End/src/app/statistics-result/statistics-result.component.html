@@ -1,35 +1,26 @@
-<h1>statistics</h1>
-<div>
-  <div>
-    <button (click)="statOne()">Percentage female versus male</button>
+<h3>View Statistics by clicking on each Stats</h3>
+<p style="margin: 2%">{{message}}</p>
+<div class="d-flex justify-content-center" style="background-color: darkgray;">
+  <div id="chart" style="padding: 50px 0px 50px 0">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [labels]="chartOptions.labels"
+      [responsive]="chartOptions.responsive"
+    ></apx-chart>
   </div>
-  <div>
-    <button (click)="statTwo()">Percentage of first names that start with A-M versus N-Z</button>
-  </div>
-  <div>
-    <button (click)="statThree()">Percentage of last names that start with A-M versus N-Z</button>
-  </div>
-  <div>
-    <button (click)="statFour()">Percentage of people in each state, up to the top 10 most populous states</button>
-  </div>
-  <div>
-    <button (click)="statFive()">Percentage of females in each state, up to the top 10 most populous states</button>
-  </div>
-  <div>
-    <button (click)="statSix()">Percentage of males in each state, up to the top 10 most populous states</button>
-  </div>
-  <div>
-    <button (click)="statSeven()">Percentage of people in the following age ranges: 0-20, 21-40, 41-60, 61-80, 81-100, 100+</button>
-  </div>
-  <div>
-    <div id="chart">
-      <apx-chart
-        [series]="chartOptions.series"
-        [chart]="chartOptions.chart"
-        [labels]="chartOptions.labels"
-        [responsive]="chartOptions.responsive"
-      ></apx-chart>
-    </div>
+</div>
+<div class="d-flex align-items-start" style="margin-top: 2%; margin-bottom: 2%">
+  <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-left: 2%">
+    <button class="btn btn-secondary" type="button">Stat-1</button>
+    <button class="btn btn-secondary" type="button" (click)="statTwo()">Stat-2</button>
+    <button class="btn btn-secondary" type="button" (click)="statThree()">Stat-3
+    </button>
+    <button class="btn btn-secondary" type="button" (click)="statFour()">Stat-4</button>
+    <button class="btn btn-secondary" type="button" (click)="statFive()">Stat-5</button>
+    <button class="btn btn-secondary" type="button" (click)="statSix()">Stat-6</button>
+    <button class="btn btn-secondary" type="button" (click)="statSeven()">Stat-7
+    </button>
   </div>
 </div>
 
