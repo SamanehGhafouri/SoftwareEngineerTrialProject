@@ -58,6 +58,10 @@ export class StatisticsResultComponent implements OnInit {
 
   ngOnInit() {
     // StatOne
+    this.statOne();
+  }
+
+  statOne() {
     this.statisticOne = this.statistics.percent_stat_1;
     this.chartOptions.series = [this.statisticOne, (100 - this.statisticOne)];
     this.chartOptions.labels = ['Female', 'Male'];
