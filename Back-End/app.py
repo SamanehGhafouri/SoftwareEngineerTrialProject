@@ -11,7 +11,7 @@ class FlaskServer:
         self.service.add_url_rule('/', view_func=self.home)
         self.service.add_url_rule('/results', view_func=self.results, methods=['POST'])
         self.service.add_url_rule('/results/<string:file_type>', view_func=self.results, methods=['POST'])
-        self.service.run()
+        self.service.run(threaded=True)
 
     def home(self):
         return render_template('home.html')
@@ -42,3 +42,4 @@ class FlaskServer:
 
 if __name__ == '__main__':
     server = FlaskServer()
+
