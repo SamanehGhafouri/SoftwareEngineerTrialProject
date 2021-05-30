@@ -16,7 +16,6 @@ export class UserInputComponent implements OnInit {
   properJsonErrorMsg;
   isProperFileExtension;
 
-
   constructor(private service: StatisticsService, public router: Router, private spinner: NgxSpinnerService) {
     this.isProperFileExtension = true;
     this.properFileExtensionErrorMsg = 'File extension must be .txt or .json';
@@ -40,12 +39,12 @@ export class UserInputComponent implements OnInit {
       if (typeof fileReader.result === 'string' && this.service.validateFileExtension(event.target.files[0].name)) {
         this.isProperFileExtension = true;
         this.jsonString = fileReader.result;
-        // console.log(JSON.parse(fileReader.result));
       } else {
         this.isProperFileExtension = false;
       }
     };
     fileReader.onerror = (error) => {
+      // TODO: Report to the user that an error happened while reading file
       console.log(error);
     };
   }
@@ -61,12 +60,11 @@ export class UserInputComponent implements OnInit {
           this.router.navigate(['/results']);
           // route to next page and pass data
           this.service.responseData = data;
-          console.log('## RESPONSE FROM BACK END ##', data);
         },
-        error: error => {
+        error: response => {
           this.spinner.hide();
-          const errorMessage = error.message;
-          console.error('There was an error!', error);
+          const errorMessage = response.message;
+          this.properJsonErrorMsg = errorMessage + ', ' + response.error.ERROR;
         }
       });
     } else {

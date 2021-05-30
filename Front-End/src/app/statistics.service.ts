@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,11 @@ export class StatisticsService {
     return true;
   }
   uploadJson(json: string){
-    return this.http.post<any>('http://127.0.0.1:5000/results?format=xml', json);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post<any>('http://127.0.0.1:5000/results', json, httpOptions);
   }
 }
