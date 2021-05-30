@@ -30,7 +30,7 @@ class FlaskServer:
             return response, 400
         else:
             if file_type is None:
-                # assign default file type of json
+                # assign default file type of json.
                 file_type = "json"
             try:
                 stats = Statistics(request.json, file_type)
