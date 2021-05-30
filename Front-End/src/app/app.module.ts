@@ -11,7 +11,6 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {SidebarModule} from 'ng-sidebar';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -19,7 +18,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     UserInputComponent,
     StatisticsResultComponent,
-    DashboardComponent,
   ],
   imports: [
     BrowserModule,
