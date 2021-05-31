@@ -1,6 +1,6 @@
-<h3>View Statistics by clicking on each Stat</h3>
-<p style="margin: 2%">{{message}}</p>
-<div class="d-flex justify-content-center" style="background-color: darkgray;">
+<h3>View Statistics by Selecting a Stat Button From the Menu</h3>
+<p style="margin-left: 20px">{{message}}</p>
+<div class="d-flex justify-content-center position-relative" style="background-color: darkgray;">
   <div id="chart" style="padding: 50px 0px 50px 0">
     <apx-chart
       [series]="chartOptions.series"
@@ -9,19 +9,16 @@
       [responsive]="chartOptions.responsive"
     ></apx-chart>
   </div>
-</div>
-<div class="d-flex align-items-start" style="margin-top: 2%; margin-bottom: 2%">
-  <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-left: 2%">
-    <button class="btn btn-secondary" type="button" (click)="statOne()">Stat-1</button>
-    <button class="btn btn-secondary" type="button" (click)="statTwo()">Stat-2</button>
-    <button class="btn btn-secondary" type="button" (click)="statThree()">Stat-3
-    </button>
-    <button class="btn btn-secondary" type="button" (click)="statFour()">Stat-4</button>
-    <button class="btn btn-secondary" type="button" (click)="statFive()">Stat-5</button>
-    <button class="btn btn-secondary" type="button" (click)="statSix()">Stat-6</button>
-    <button class="btn btn-secondary" type="button" (click)="statSeven()">Stat-7
-    </button>
+  <div class="position-absolute top-50 start-0 translate-middle-y">
+    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+      <button class="btn btn-secondary" type="button" (click)="statOne()">Stat 1</button>
+      <button class="btn btn-secondary" type="button" (click)="statTwo()">Stat 2</button>
+      <button class="btn btn-secondary" type="button" (click)="statThree()">Stat 3</button>
+      <button class="btn btn-secondary" type="button" (click)="statFour()">Stat 4</button>
+      <button class="btn btn-secondary" type="button" (click)="statFive()">Stat 5</button>
+      <button class="btn btn-secondary" type="button" (click)="statSix()">Stat 6</button>
+      <button class="btn btn-secondary" type="button" (click)="statSeven()">Stat 7</button>
+    </div>
   </div>
 </div>
-
 
