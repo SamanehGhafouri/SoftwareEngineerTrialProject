@@ -181,7 +181,7 @@ class Statistics:
 
 
 if __name__ == "__main__":
-    with open("third_json_data.json", "r") as f:
+    with open("test_cases/third_test_data.json", "r") as f:
         data_obj = json.load(f)
 
         get_json = Statistics(data_obj, "json")

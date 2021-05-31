@@ -2,10 +2,10 @@ import unittest
 from statistics import Statistics
 import json
 
-first_json = "first_json_data.json"
-second_json = "second_json_data.json"
-third_json = "third_json_data.json"
-last_json = "last_json_data.json"
+first_json = "first_test_data.json"
+second_json = "second_test_data.json"
+third_json = "third_test_data.json"
+forth_json = "forth_test_data.json"
 
 
 def read_json(json_f):
@@ -63,7 +63,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expected, actual, expected == actual)
 
     def test_percentage_people_in_age_ranges(self):
-        stat = Statistics(read_json(last_json), "json")
+        stat = Statistics(read_json(forth_json), "json")
         actual = stat.percentage_people_in_age_ranges()
         expected = {"0-20": 28.57, "21-40": 23.81, "41-60": 19.05,
                     "61-80": 14.29, "81-100": 9.52, "100+": 4.76}

@@ -38,12 +38,7 @@ Brief documentation can be found at: https://statistics-sam.herokuapp.com. You c
 * You should be able to see the statistics based on file-type you requested.
 
 ## Testing
-Provided Unittests on functionality of statistics can be found at test_statistics.py
-These tests are using following json files as inputs:
-* first_json_data.json
-* seccond_json_data.json
-* third_json_data.json
-* forth_json_data.json
-* last_json_data.json
+Provided Unittests on functionality of statistics can be found in test_cases folder along with test data as json files.
+
 
 
