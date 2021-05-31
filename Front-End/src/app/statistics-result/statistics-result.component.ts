@@ -31,7 +31,7 @@ export class StatisticsResultComponent implements OnInit {
   statisticSeven;
 
   constructor(private userInput: UserInputComponent, private service: StatisticsService, private router: Router) {
-    if (this.service.responseData === undefined){
+    if (this.service.responseData === undefined) {
       this.router.navigate(['/home']);
     }
     this.statistics = this.service.responseData.stats;
@@ -145,5 +145,4 @@ export class StatisticsResultComponent implements OnInit {
     this.chartOptions.labels = arrKeys;
     this.message = '7.Percentage of People In The Following Age Ranges: 0-20, 21-40, 41-60, 61-80, 81-100, 100+';
   }
-
 }

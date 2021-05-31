@@ -31,6 +31,6 @@ export class StatisticsService {
         'Content-Type':  'application/json'
       })
     };
-    return this.http.post<any>('http://127.0.0.1:5000/results', json, httpOptions);
+    return this.http.post<any>('https://statistics-sam.herokuapp.com/results', json, httpOptions);
   }
 }
