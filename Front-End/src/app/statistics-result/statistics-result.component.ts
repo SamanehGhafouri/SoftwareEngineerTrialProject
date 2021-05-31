@@ -69,21 +69,21 @@ export class StatisticsResultComponent implements OnInit {
     this.statisticOne = this.statistics.percent_stat_1;
     this.chartOptions.series = [this.statisticOne, (100 - this.statisticOne)];
     this.chartOptions.labels = ['Female', 'Male'];
-    this.message = '1.Percentage Female Versus Male';
+    this.message = '1. Percentage Female Versus Male';
   }
 
   statTwo() {
     this.statisticTwo = this.statistics.percent_stat_2;
     this.chartOptions.series = [this.statisticTwo, (100 - this.statisticTwo)];
     this.chartOptions.labels = ['First Name (A-M)', 'First Name (N-Z)'];
-    this.message = '2.Percentage of First Names That Start With A-M Versus N-Z';
+    this.message = '2. Percentage of First Names That Start With A-M Versus N-Z';
   }
 
   statThree() {
     this.statisticThree = this.statistics.percent_stat_3;
     this.chartOptions.series = [this.statisticThree, (100 - this.statisticThree)];
     this.chartOptions.labels = ['Last Name (A-M)', 'Last Name (N-Z)'];
-    this.message = '3.Percentage of Last Names That Start With A-M Versus N-Z';
+    this.message = '3. Percentage of Last Names That Start With A-M Versus N-Z';
   }
 
   statFour() {
@@ -98,7 +98,7 @@ export class StatisticsResultComponent implements OnInit {
     }
     this.chartOptions.series = arrValues;
     this.chartOptions.labels = arrKeys;
-    this.message = '4.Percentage of People In Each State, Up To The Top 10 Most Populous States';
+    this.message = '4. Percentage of People In Each State, Up To The Top 10 Most Populous States';
   }
 
   statFive() {
@@ -113,7 +113,7 @@ export class StatisticsResultComponent implements OnInit {
     }
     this.chartOptions.series = arrValues;
     this.chartOptions.labels = arrKeys;
-    this.message = '5.Percentage of Female In Each State, Up To The Top 10 Most Populous States';
+    this.message = '5. Percentage of Female In Each State, Up To The Top 10 Most Populous States';
   }
 
   statSix() {
@@ -128,7 +128,7 @@ export class StatisticsResultComponent implements OnInit {
     }
     this.chartOptions.series = arrValues;
     this.chartOptions.labels = arrKeys;
-    this.message = '6.Percentage of Male In Each State, Up To The Top 10 Most Populous States';
+    this.message = '6. Percentage of Male In Each State, Up To The Top 10 Most Populous States';
   }
 
   statSeven() {
@@ -143,6 +143,6 @@ export class StatisticsResultComponent implements OnInit {
     }
     this.chartOptions.series = arrValues;
     this.chartOptions.labels = arrKeys;
-    this.message = '7.Percentage of People In The Following Age Ranges: 0-20, 21-40, 41-60, 61-80, 81-100, 100+';
+    this.message = '7. Percentage of People In The Following Age Ranges: 0-20, 21-40, 41-60, 61-80, 81-100, 100+';
   }
 }
